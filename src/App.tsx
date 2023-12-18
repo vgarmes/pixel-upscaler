@@ -49,7 +49,7 @@ function App() {
         onClick={() => {
           const img = new Image();
           img.src = imageUrl;
-          setImage(img);
+          img.onload = () => setImage(img);
         }}
       >
         Scale!
