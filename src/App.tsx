@@ -37,23 +37,25 @@ function App() {
   }, [scaleFactor, image]);
 
   return (
-    <div className="flex flex-col items-center w-full px-3 gap-3 pt-3 min-h-screen justify-center">
-      <Input
-        className="max-w-sm"
-        label="url"
-        value={imageUrl}
-        onChange={(e) => setImageUrl(e.currentTarget.value)}
-      />
-      <Button
-        color="primary"
-        onClick={() => {
-          const img = new Image();
-          img.src = imageUrl;
-          img.onload = () => setImage(img);
-        }}
-      >
-        Scale!
-      </Button>
+    <div className="flex flex-col items-center w-full h-screen border-white p-3 gap-3 min-h-screen">
+      <div className="flex w-full items-center gap-3 justify-center">
+        <Input
+          className="max-w-sm"
+          label="url"
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.currentTarget.value)}
+        />
+        <Button
+          color="primary"
+          onClick={() => {
+            const img = new Image();
+            img.src = imageUrl;
+            img.onload = () => setImage(img);
+          }}
+        >
+          Scale!
+        </Button>
+      </div>
       <Slider
         aria-label="scale"
         minValue={1}
@@ -74,11 +76,9 @@ function App() {
       >{`${(image?.width ?? 0) * scaleFactor} x ${
         (image?.height ?? 0) * scaleFactor
       } pixels`}</p>
-
-      <h3>Preview</h3>
       <div
         ref={containerRef}
-        className="w-64 h-64 overflow-x-auto overflow-y-auto border border-white"
+        className="w-full rounded flex-grow overflow-x-auto overflow-y-auto border border-gray-500"
       >
         <canvas ref={canvasRef}></canvas>
       </div>
